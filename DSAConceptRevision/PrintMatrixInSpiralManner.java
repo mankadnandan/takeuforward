@@ -1,12 +1,6 @@
 /*
  * https://takeuforward.org/plus/dsa-concept-revision/day-1/print-the-matrix-in-spiral-manner
- * 
- * i/p:
- * 14
- * 6 4 2 7 8 1 3 6 9 7 4 1 2 5
- * 
- * o/p:
- * 1 1 2 2 3 4 4 5 6 6 7 7 8 9 
+ *
  */
 
 import java.util.ArrayList;
