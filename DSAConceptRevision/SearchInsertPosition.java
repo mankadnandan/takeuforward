@@ -1,3 +1,6 @@
+/*
+ * https://takeuforward.org/plus/dsa/binary-search/logic-building/search-insert-position
+ */
 public class SearchInsertPosition {
     public static void main(String[] args) {
         System.out.println(searchInsert(new int[] { 1, 3, 5, 6 }, 7));
