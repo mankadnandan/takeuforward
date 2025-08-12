@@ -1,18 +1,17 @@
 /*
  * https://takeuforward.org/plus/dsa/problems/topological-sort-or-kahns-algorithm
  * 
- * DFS.
+ * BFS or Kahn's Algorithm
  * 
  */
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
+import java.util.Queue;
 
-public class TopologicalSort {
-
+public class TopologicalSort_2 {
     public static void main(String[] args) {
         List<List<Integer>> adj = new ArrayList<>();
 
@@ -41,55 +40,57 @@ public class TopologicalSort {
         int val;
         List<Node> neighbours;
         boolean isVisited;
+        Integer indegree;
 
         Node(int val) {
             this.val = val;
             this.neighbours = new ArrayList<>();
             this.isVisited = false;
+            this.indegree = 0;
         }
     }    
 
     public static int[] topoSort(int V, List<List<Integer>> adj) {
-        List<Node> nodes = new ArrayList<>();
-        // Creating nodes
-        HashMap<Integer, Node> nodeHashMap = new HashMap<>();
+
+        // Init
+        List<Node> nodeList = new ArrayList<>();
         for (int i = 0; i < V; i++) {
             Node node = new Node(i);
-            nodeHashMap.put(i, node);
-            nodes.add(node);
+            nodeList.add(node);
         }
-        
-        // Building Graph
+
+        // Building the graph
         for (int i = 0; i < adj.size(); i++) {
-            List<Integer> neighIntegers = adj.get(i);
-            for (Integer nodeVal : neighIntegers) {
-                nodeHashMap.get(i).neighbours.add(nodeHashMap.get(nodeVal));
+            for (Integer neighbour : adj.get(i)) {
+                nodeList.get(i).neighbours.add(nodeList.get(neighbour));
+                nodeList.get(neighbour).indegree++;
             }
         }
 
-        Stack<Integer> topoSortStack = new Stack<>();
-       
-        for (Node node : nodes) {
-            if (!node.isVisited) {
-                dfs(node, topoSortStack);
-            }                        
+        Queue<Node> queue = new LinkedList<>();
+        for (int i = 0; i < nodeList.size(); i++) {
+            if (nodeList.get(i).indegree == 0) {
+                queue.add(nodeList.get(i));
+            }            
         }
-        int[] result = new int[V];
-        int i = 0;
-        while (!topoSortStack.isEmpty()) {
-            result[i] = topoSortStack.pop();
-            i++;
-        }
-        return result;
-    }
-    
-    private static void dfs(Node node, Stack<Integer> topoSortStack) {
-        for (Node neighNode : node.neighbours) {
-            if (!neighNode.isVisited) {
-                dfs(neighNode, topoSortStack);                
+
+        List<Node> resultList = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            resultList.add(node);
+            for (Node neigh : node.neighbours) {
+                neigh.indegree--;
+                if (neigh.indegree == 0) {
+                    queue.add(neigh);
+                }            
             }
         }
-        node.isVisited = true;
-        topoSortStack.add(node.val);
-    }
+        int[] result = new int[V];
+
+        for (int i = 0; i < resultList.size(); i++) {
+            result[i] = resultList.get(i).val;
+        }
+
+        return result;
+    }    
 }
