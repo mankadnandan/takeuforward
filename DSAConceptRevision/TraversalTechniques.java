@@ -1,5 +1,6 @@
+
 /*
- * https://takeuforward.org/plus/dsa-concept-revision/day-25/traversal-techniques
+ * https://takeuforward.org/plus/dsa/problems/traversal-techniques
  */
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,8 +29,8 @@ public class TraversalTechniques {
 
         // Example 2
         adj = new ArrayList<>();
-        v0 = Arrays.asList(1,3);
-        v1 = Arrays.asList(2,0);
+        v0 = Arrays.asList(1, 3);
+        v1 = Arrays.asList(2, 0);
         v2 = Arrays.asList(1);
         v3 = Arrays.asList(0);
         adj.add(v0);
@@ -43,7 +44,7 @@ public class TraversalTechniques {
 
         // Example 3
         adj = new ArrayList<>();
-        v0 = Arrays.asList(1,2);
+        v0 = Arrays.asList(1, 2);
         v1 = Arrays.asList(0);
         v2 = Arrays.asList(0);
         adj.add(v0);
