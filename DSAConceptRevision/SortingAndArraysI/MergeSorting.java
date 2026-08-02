@@ -1,3 +1,5 @@
+package SortingAndArraysI;
+
 /*
  * https://takeuforward.org/plus/dsa-concept-revision/day-1/merge-sorting
  * 
