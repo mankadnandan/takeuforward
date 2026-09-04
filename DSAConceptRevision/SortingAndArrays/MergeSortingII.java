@@ -1,4 +1,4 @@
-package SortingAndArraysI;
+package SortingAndArrays;
 
 /*
  * https://takeuforward.org/plus/dsa/problems/merge-sorting
