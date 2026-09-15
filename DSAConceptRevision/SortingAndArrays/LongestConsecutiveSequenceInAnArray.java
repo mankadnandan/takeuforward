@@ -1,3 +1,5 @@
+package SortingAndArrays;
+
 /*
  * https://takeuforward.org/plus/dsa-concept-revision/day-1/longest-consecutive-sequence-in-an-array
  * 
@@ -16,11 +18,10 @@
  * 1 1 2 2 3 4 4 5 6 6 7 7 8 9 
  * 
  */
-
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class LongestConsecutiveSequenceInAnArray_2 {
+public class LongestConsecutiveSequenceInAnArray {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int numOfTestCases = in.nextInt();
@@ -36,29 +37,22 @@ public class LongestConsecutiveSequenceInAnArray_2 {
     }
 
     public static int longestConsecutive(int[] nums) {
-        HashSet<Integer> hashSet = new HashSet<>();
-        int maxConsCount = 0;
-
-        for (int i = 0; i < nums.length; i++) {
-            hashSet.add(nums[i]);
-        }
-
-        for (Integer ele : hashSet) {
-            if (!hashSet.contains(ele - 1)) {
-                int currConsCount = findConsecutiveChainLength(ele, hashSet);
-                maxConsCount = Math.max(maxConsCount, currConsCount);
+        Arrays.sort(nums);
+        int currConsCount = 1;
+        int maxConsCount = 1;
+        int prevNum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (prevNum == nums[i]) {
+                continue;
+            } else if (prevNum + 1 == nums[i]) {
+                currConsCount++;
+            } else {
+                currConsCount = 1;
             }
+            prevNum = nums[i];
+            maxConsCount = Math.max(maxConsCount, currConsCount);
         }
         return maxConsCount;
     }
 
-    private static int findConsecutiveChainLength(Integer ele, HashSet<Integer> hashSet) {
-        int consCountChainLen = 0;
-        int currEle = ele;
-        while (hashSet.contains(currEle)) {
-            consCountChainLen++;
-            currEle = currEle + 1;
-        }
-        return consCountChainLen;
-    }
 }
